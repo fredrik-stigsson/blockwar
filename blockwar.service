@@ -1,0 +1,30 @@
+[Unit]
+Description=Blockwar
+Documentation=https://github.com/fredrik-stigsson/blockwar
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/blockwar
+ExecStart=/usr/bin/node server.js
+Restart=always
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=blockwar
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/www/blockwar
+
+# Environment variables if needed
+Environment=NODE_ENV=production
+Environment=PORT=3002
+
+[Install]
+WantedBy=multi-user.target
